@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сообщение</title>
+    <title>Анимация текста</title>
+    <style>
+        #text {
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .visible {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
-    <h1>Иди спать</h1>
+
+<div id="text">Я сегодня в гараж</div>
+
+<script>
+    const textElement = document.getElementById('text');
+
+    function showText() {
+        textElement.classList.add('visible');
+        setTimeout(() => {
+            textElement.classList.remove('visible');
+        }, 2000); // Текст будет виден 2 секунды
+    }
+
+    setInterval(showText, 4000); // Показать текст каждые 4 секунды
+</script>
+
 </body>
 </html>
