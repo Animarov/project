@@ -108,6 +108,7 @@
         .catalog-options {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 40px;
         }
@@ -121,7 +122,8 @@
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             flex: 1;
-            max-width: 300px;
+            max-width: 250px;
+            min-width: 200px;
         }
         
         .catalog-option:hover {
@@ -142,6 +144,42 @@
         
         .computers {
             display: none;
+        }
+        
+        .development-message {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        
+        .development-message i {
+            font-size: 80px;
+            color: #4ca1af;
+            margin-bottom: 20px;
+        }
+        
+        .development-message h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #4ca1af;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: #2c3e50;
         }
         
         .computers-list {
@@ -260,6 +298,10 @@
                 align-items: center;
             }
             
+            .catalog-option {
+                max-width: 100%;
+            }
+            
             .hero h1 {
                 font-size: 2rem;
             }
@@ -309,31 +351,50 @@
                     <h3>Купить сборку компьютера</h3>
                     <p>Подберем комплектующие специально для вас</p>
                 </div>
+                <div class="catalog-option" onclick="showDevelopment('sell-computer')">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Продать компьютер</h3>
+                    <p>Выгодно продайте ваше устройство</p>
+                </div>
+                <div class="catalog-option" onclick="showDevelopment('sell-components')">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Продать комплектующие</h3>
+                    <p>Реализуйте ненужные компоненты</p>
+                </div>
+            </div>
+
+            <!-- Сообщение о разработке -->
+            <div id="development-message" class="development-message">
+                <i class="fas fa-cogs"></i>
+                <h2>Раздел в разработке</h2>
+                <p>Данный раздел находится в стадии разработки. Пожалуйста, проверьте позже.</p>
+                <a href="#" class="back-btn" onclick="showCatalog()">Вернуться в каталог</a>
             </div>
 
             <div id="computers" class="computers">
+                <a href="#" class="back-btn" onclick="showCatalog()">← Вернуться в каталог</a>
                 <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">В данный момент доступно 2 игровых компьютера</h2>
                 
                 <div class="computers-list">
                     <!-- Компьютер 1 -->
                     <div class="computer-card">
                         <div class="computer-image">
-                            <img src="https://i.postimg.cc/R0vC16TT/IMG-20250904-235736-764.jpg&auto=format&fit=crop&w=1200&q=80" alt="Игровой компьютер">
+                            <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Игровой компьютер">
                         </div>
                         <div class="computer-details">
                             <h3>i5-14400F + RTX 2060Super</h3>
                             <p>Игровой и мощный, а главное дешевый.</p>
                             <div class="specs">
                                 <div>
-                                    <span><img src="https://i.postimg.cc/7LcxFskK/4854348.png" class="component-image" alt="Процессор"> Процессор:</span> 
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503100.png" class="component-image" alt="Процессор"> Процессор:</span> 
                                     <span>i5-14400f</span>
                                 </div>
                                 <div>
-                                    <span><img src="https://i.postimg.cc/fLhPSmjw/video-card-vector-monochrome-object-design-element-isolated-white-background-258353-864.jpg" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503462.png" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
                                     <span>RTX 2060Super</span>
                                 </div>
                                 <div>
-                                    <span><img src="https://i.postimg.cc/d1vWVvw3/5321443.png" class="component-image" alt="SSD"> SSD M2:</span> 
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503046.png" class="component-image" alt="SSD"> SSD M2:</span> 
                                     <span>512GB</span>
                                 </div>
                                 <div>
@@ -405,15 +466,30 @@
             document.getElementById('home').style.display = 'none';
             document.getElementById('catalog').style.display = 'block';
             document.getElementById('computers').style.display = 'none';
+            document.getElementById('development-message').style.display = 'none';
+            
+            // Показываем опции каталога
+            document.querySelector('.catalog-options').style.display = 'flex';
         }
         
         function showComputers() {
             document.getElementById('computers').style.display = 'block';
+            document.getElementById('development-message').style.display = 'none';
+            
+            // Скрываем опции каталога
+            document.querySelector('.catalog-options').style.display = 'none';
+        }
+        
+        function showDevelopment(section) {
+            document.getElementById('development-message').style.display = 'block';
+            document.getElementById('computers').style.display = 'none';
+            
+            // Скрываем опции каталога
+            document.querySelector('.catalog-options').style.display = 'none';
         }
         
         // Показываем главную страницу при загрузке
         window.onload = showHome;
     </script>
 </body>
-    </html>
-
+</html>
