@@ -106,10 +106,9 @@
         }
         
         .catalog-options {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
             margin-bottom: 40px;
         }
         
@@ -121,9 +120,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
-            flex: 1;
-            max-width: 250px;
-            min-width: 200px;
         }
         
         .catalog-option:hover {
@@ -294,12 +290,7 @@
             }
             
             .catalog-options {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .catalog-option {
-                max-width: 100%;
+                grid-template-columns: 1fr;
             }
             
             .hero h1 {
@@ -469,7 +460,7 @@
             document.getElementById('development-message').style.display = 'none';
             
             // Показываем опции каталога
-            document.querySelector('.catalog-options').style.display = 'flex';
+            document.querySelector('.catalog-options').style.display = 'grid';
         }
         
         function showComputers() {
