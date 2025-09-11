@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimaroVs Shop</title>
+    <title>TechStore - Компьютеры и сборки</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -12,685 +12,359 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        :root {
-            --primary: #2c3e50;
-            --secondary: #e74c3c;
-            --accent: #3498db;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #2ecc71;
-            --warning: #f39c12;
-        }
-
+        
         body {
             background-color: #f5f7fa;
             color: #333;
-            min-height: 100vh;
+            line-height: 1.6;
         }
-
-        /* Навигационное меню */
-        nav {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Стили для меню */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
             color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: bold;
             display: flex;
             align-items: center;
         }
-
-        .logo span {
-            color: var(--secondary);
+        
+        .logo i {
+            margin-right: 10px;
+            color: #4ca1af;
         }
-
-        .nav-links {
+        
+        .menu {
             display: flex;
-            gap: 2rem;
+            list-style: none;
         }
-
-        .nav-links a {
+        
+        .menu li {
+            margin-left: 25px;
+        }
+        
+        .menu a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: color 0.3s;
+            padding: 10px 15px;
+            border-radius: 5px;
         }
-
-        .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+        
+        .menu a:hover {
+            color: #4ca1af;
+            background: rgba(255, 255, 255, 0.1);
         }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-links a:hover::after {
-            width: 80%;
-        }
-
-        /* Основной контент */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        /* Главная страница */
+        
+        /* Стили для главной страницы */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(26, 37, 48, 0.8)), url('https://images.unsplash.com/photo-1547082299-de196ea013d6?ixlib=rb-4.0.3') center/cover no-repeat;
             color: white;
-            padding: 5rem 2rem;
             text-align: center;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 100px 20px;
+            margin-bottom: 40px;
         }
-
+        
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-
+        
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
-
-        .hero-btn {
-            display: inline-block;
-            background-color: var(--secondary);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--secondary);
+        
+        /* Стили для каталога */
+        .catalog {
+            display: none;
+            padding: 40px 0;
         }
-
-        .hero-btn:hover {
-            background-color: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        
+        .catalog-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
         }
-
-        /* Страница товаров */
-        .admin-panel {
+        
+        .catalog-option {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
-        }
-
-        .admin-panel h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light);
-        }
-
-        .admin-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .admin-form input {
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .admin-form button {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 0 1.5rem;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex: 1;
+            max-width: 300px;
         }
-
-        .admin-form button:hover {
-            background-color: #2980b9;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product-card:hover {
+        
+        .catalog-option:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
-
-        .product-img {
+        
+        .catalog-option i {
+            font-size: 50px;
+            color: #4ca1af;
+            margin-bottom: 15px;
+        }
+        
+        .catalog-option h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .computers {
+            display: none;
+        }
+        
+        .computers-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .computer-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .computer-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .computer-image {
             height: 200px;
-            background-color: #f1f1f1;
+            background-color: #4ca1af;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #888;
-            font-size: 3rem;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-info h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .product-info p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .product-price {
-            font-weight: 700;
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .delete-btn {
-            background-color: #e74c3c;
             color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 24px;
         }
-
-        .delete-btn:hover {
-            background-color: #c0392b;
+        
+        .computer-details {
+            padding: 20px;
         }
-
-        /* Страница профиля */
-        .auth-container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        
+        .computer-details h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
         }
-
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .auth-tab {
-            padding: 1rem 2rem;
-            cursor: pointer;
-            text-align: center;
-            flex: 1;
-            font-weight: 600;
-            color: #888;
-            transition: all 0.3s ease;
-        }
-
-        .auth-tab.active {
-            color: var(--accent);
-            border-bottom: 3px solid var(--accent);
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+        
+        .computer-details p {
+            margin-bottom: 10px;
             color: #555;
         }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+        
+        .specs {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f5f7fa;
+            border-radius: 5px;
         }
-
-        .auth-btn {
+        
+        .specs div {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .buy-btn {
+            display: block;
             width: 100%;
-            padding: 1rem;
-            background-color: var(--accent);
+            padding: 12px;
+            background: linear-gradient(135deg, #4ca1af, #2c3e50);
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s;
         }
-
-        .auth-btn:hover {
-            background-color: #2980b9;
+        
+        .buy-btn:hover {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
         }
-
-        .profile-content {
+        
+        /* Стили для футера */
+        footer {
+            background: #2c3e50;
+            color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 30px 0;
+            margin-top: 50px;
         }
-
-        .profile-icon {
-            font-size: 5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        /* Утилиты */
-        .hidden {
-            display: none;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
+        
         /* Адаптивность */
         @media (max-width: 768px) {
-            .nav-container {
+            .menu {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: center;
             }
-
-            .nav-links {
-                gap: 1rem;
+            
+            .menu li {
+                margin: 10px 0;
             }
-
+            
+            .catalog-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
-
-            .admin-form {
-                grid-template-columns: 1fr;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
+            
+            .hero p {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Навигационное меню -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Animarovs<span>Shop</span></div>
-            <div class="nav-links">
-                <a href="#" class="nav-link" data-page="home">Главная</a>
-                <a href="#" class="nav-link" data-page="products">Товары</a>
-                <a href="#" class="nav-link" data-page="profile">Профиль</a>
-            </div>
+    <!-- Шапка с меню -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-desktop"></i>
+                    <span>TechStore</span>
+                </div>
+                <ul class="menu">
+                    <li><a href="#" onclick="showHome()">Главная</a></li>
+                    <li><a href="#" onclick="showCatalog()">Каталог</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Контейнер для контента -->
-    <div class="container">
-        <!-- Главная страница -->
-        <div id="home" class="page active">
-            <div class="hero">
-                <h1>AnimaroVs Shop</h1>
-                <p>Предоставляем разные товары начиная от одежды или электроники заканчивая эксклюзивными и редкими вещами. Широкий ассортимент, качественный сервис и привлекательные цены.</p>
-                <a href="#" class="hero-btn" data-page="products">Смотреть товары</a>
-            </div>
+    <!-- Главная страница -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Сборка компьютеров или покупка готовых?</h1>
+            <p>Мы поможем вам, самые выгодные цены только у нас.</p>
         </div>
+    </section>
 
-        <!-- Страница товаров -->
-        <div id="products" class="page">
-            <div class="admin-panel">
-                <h2><i class="fas fa-cog"></i> Панель администратора</h2>
-                <div class="admin-form">
-                    <input type="text" id="product-name" placeholder="Название товара">
-                    <input type="number" id="product-price" placeholder="Цена">
-                    <button id="add-product"><i class="fas fa-plus"></i> Добавить</button>
+    <!-- Каталог -->
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <div class="catalog-options">
+                <div class="catalog-option" onclick="showComputers()">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Купить компьютер</h3>
+                    <p>Готовые решения для любых задач</p>
+                </div>
+                <div class="catalog-option">
+                    <i class="fas fa-tools"></i>
+                    <h3>Купить сборку компьютера</h3>
+                    <p>Подберем комплектующие специально для вас</p>
                 </div>
             </div>
 
-            <div class="products-grid" id="products-container">
-                <!-- Товары будут добавлены через JavaScript -->
-            </div>
-        </div>
-
-        <!-- Страница профиля -->
-        <div id="profile" class="page">
-            <div id="auth-forms">
-                <div class="auth-container">
-                    <div class="auth-tabs">
-                        <div class="auth-tab active" data-form="login">Вход</div>
-                        <div class="auth-tab" data-form="register">Регистрация</div>
+            <div id="computers" class="computers">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">В данный момент доступно 2 игровых компьютера</h2>
+                
+                <div class="computers-list">
+                    <!-- Компьютер 1 -->
+                    <div class="computer-card">
+                        <div class="computer-image">
+                            <i class="fas fa-computer" style="font-size: 48px;"></i>
+                        </div>
+                        <div class="computer-details">
+                            <h3>i5-14400F + RTX 2060Super</h3>
+                            <p>Игровой и мощный, а главное дешевый.</p>
+                            <div class="specs">
+                                <div><span>Процессор:</span> <span>i5-14400f</span></div>
+                                <div><span>Видеокарта:</span> <span>RTX 2060Super</span></div>
+                                <div><span>SSD M2:</span> <span>512GB</span></div>
+                                <div><span>Оперативная память:</span> <span>16+16 32GB (3200)</span></div>
+                                <div><span>Блок питания:</span> <span>500W</span></div>
+                            </div>
+                            <button class="buy-btn">Купить</button>
+                        </div>
                     </div>
-
-                    <div id="login-form" class="auth-form active">
-                        <div class="form-group">
-                            <label for="login-email">Email</label>
-                            <input type="email" id="login-email" placeholder="Введите ваш email">
+                    
+                    <!-- Компьютер 2 -->
+                    <div class="computer-card">
+                        <div class="computer-image">
+                            <i class="fas fa-computer" style="font-size: 48px;"></i>
                         </div>
-                        <div class="form-group">
-                            <label for="login-password">Пароль</label>
-                            <input type="password" id="login-password" placeholder="Введите ваш пароль">
+                        <div class="computer-details">
+                            <h3>i5-14400F + RTX 3070</h3>
+                            <p>Мощная игровая система для требовательных игр.</p>
+                            <div class="specs">
+                                <div><span>Процессор:</span> <span>i5-14400f</span></div>
+                                <div><span>Видеокарта:</span> <span>RTX 3070</span></div>
+                                <div><span>SSD M2:</span> <span>1000GB</span></div>
+                                <div><span>Оперативная память:</span> <span>16+16=32GB (3200)</span></div>
+                                <div><span>Блок питания:</span> <span>750W</span></div>
+                            </div>
+                            <button class="buy-btn">Купить</button>
                         </div>
-                        <button class="auth-btn" id="login-btn">Войти</button>
-                    </div>
-
-                    <div id="register-form" class="auth-form">
-                        <div class="form-group">
-                            <label for="register-name">Имя</label>
-                            <input type="text" id="register-name" placeholder="Введите ваше имя">
-                        </div>
-                        <div class="form-group">
-                            <label for="register-email">Email</label>
-                            <input type="email" id="register-email" placeholder="Введите ваш email">
-                        </div>
-                        <div class="form-group">
-                            <label for="register-password">Пароль</label>
-                            <input type="password" id="register-password" placeholder="Придумайте пароль">
-                        </div>
-                        <button class="auth-btn" id="register-btn">Зарегистрироваться</button>
                     </div>
                 </div>
             </div>
-
-            <div id="profile-content" class="profile-content hidden">
-                <div class="profile-icon">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <h2>Добро пожаловать, <span id="user-name">Пользователь</span>!</h2>
-                <p>Ваш email: <span id="user-email">user@example.com</span></p>
-                <button class="auth-btn" id="logout-btn" style="background-color: var(--secondary); margin-top: 1.5rem;">Выйти</button>
-            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2023 TechStore. Все права защищены.</p>
+        </div>
+    </footer>
 
     <script>
-        // Эмуляция базы данных через localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            // Инициализация данных, если их нет
-            if (!localStorage.getItem('products')) {
-                const initialProducts = [
-                    { id: 1, name: "Футболка Premium", price: 1999 },
-                    { id: 2, name: "Смартфон X20", price: 25999 },
-                    { id: 3, name: "Дизайнерские кроссовки", price: 8999 }
-                ];
-                localStorage.setItem('products', JSON.stringify(initialProducts));
-            }
-            
-            if (!localStorage.getItem('users')) {
-                const initialUsers = [
-                    { id: 1, name: "Admin", email: "admin@example.com", password: "admin123" }
-                ];
-                localStorage.setItem('users', JSON.stringify(initialUsers));
-            }
-            
-            if (!localStorage.getItem('currentUser')) {
-                localStorage.setItem('currentUser', JSON.stringify(null));
-            }
-            
-            // Загрузка товаров
-            loadProducts();
-            
-            // Проверка авторизации
-            checkAuth();
-            
-            // Навигация
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const pageId = this.getAttribute('data-page');
-                    showPage(pageId);
-                });
-            });
-            
-            // Переход на страницу товаров с главной
-            document.querySelector('.hero-btn').addEventListener('click', function(e) {
-                e.preventDefault();
-                showPage('products');
-            });
-            
-            // Добавление товара
-            document.getElementById('add-product').addEventListener('click', function() {
-                const nameInput = document.getElementById('product-name');
-                const priceInput = document.getElementById('product-price');
-                
-                if (nameInput.value && priceInput.value) {
-                    addProduct(nameInput.value, parseFloat(priceInput.value));
-                    nameInput.value = '';
-                    priceInput.value = '';
-                } else {
-                    alert('Заполните все поля!');
-                }
-            });
-            
-            // Переключение между формами входа и регистрации
-            document.querySelectorAll('.auth-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-                    
-                    this.classList.add('active');
-                    const formId = this.getAttribute('data-form') + '-form';
-                    document.getElementById(formId).classList.add('active');
-                });
-            });
-            
-            // Вход
-            document.getElementById('login-btn').addEventListener('click', function() {
-                const email = document.getElementById('login-email').value;
-                const password = document.getElementById('login-password').value;
-                
-                loginUser(email, password);
-            });
-            
-            // Регистрация
-            document.getElementById('register-btn').addEventListener('click', function() {
-                const name = document.getElementById('register-name').value;
-                const email = document.getElementById('register-email').value;
-                const password = document.getElementById('register-password').value;
-                
-                registerUser(name, email, password);
-            });
-            
-            // Выход
-            document.getElementById('logout-btn').addEventListener('click', function() {
-                logoutUser();
-            });
-        });
-        
-        // Функции для работы с товарами
-        function loadProducts() {
-            const productsContainer = document.getElementById('products-container');
-            const products = JSON.parse(localStorage.getItem('products'));
-            
-            productsContainer.innerHTML = '';
-            
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-img">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <span class="product-price">${product.price.toLocaleString()} руб.</span>
-                        <button class="delete-btn" data-id="${product.id}">Удалить</button>
-                    </div>
-                `;
-                
-                productsContainer.appendChild(productCard);
-            });
-            
-            // Добавляем обработчики для кнопок удаления
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const productId = parseInt(this.getAttribute('data-id'));
-                    deleteProduct(productId);
-                });
-            });
+        // Функции для отображения нужных разделов
+        function showHome() {
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('catalog').style.display = 'none';
         }
         
-        function addProduct(name, price) {
-            const products = JSON.parse(localStorage.getItem('products'));
-            const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-            
-            products.push({
-                id: newId,
-                name: name,
-                price: price
-            });
-            
-            localStorage.setItem('products', JSON.stringify(products));
-            loadProducts();
+        function showCatalog() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('catalog').style.display = 'block';
+            document.getElementById('computers').style.display = 'none';
         }
         
-        function deleteProduct(id) {
-            let products = JSON.parse(localStorage.getItem('products'));
-            products = products.filter(product => product.id !== id);
-            localStorage.setItem('products', JSON.stringify(products));
-            loadProducts();
+        function showComputers() {
+            document.getElementById('computers').style.display = 'block';
         }
         
-        // Функции для работы с пользователями
-        function registerUser(name, email, password) {
-            const users = JSON.parse(localStorage.getItem('users'));
-            
-            // Проверяем, нет ли уже пользователя с таким email
-            if (users.some(user => user.email === email)) {
-                alert('Пользователь с таким email уже существует!');
-                return;
-            }
-            
-            const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
-            
-            users.push({
-                id: newId,
-                name: name,
-                email: email,
-                password: password
-            });
-            
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Регистрация прошла успешно! Теперь вы можете войти.');
-            
-            // Переключаем на форму входа
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-            document.querySelector('[data-form="login"]').classList.add('active');
-            document.getElementById('login-form').classList.add('active');
-        }
-        
-        function loginUser(email, password) {
-            const users = JSON.parse(localStorage.getItem('users'));
-            const user = users.find(user => user.email === email && user.password === password);
-            
-            if (user) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                checkAuth();
-                alert('Вход выполнен успешно!');
-            } else {
-                alert('Неверный email или пароль!');
-            }
-        }
-        
-        function logoutUser() {
-            localStorage.setItem('currentUser', JSON.stringify(null));
-            checkAuth();
-            alert('Вы вышли из системы');
-        }
-        
-        function checkAuth() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            const authForms = document.getElementById('auth-forms');
-            const profileContent = document.getElementById('profile-content');
-            
-            if (currentUser) {
-                authForms.classList.add('hidden');
-                profileContent.classList.remove('hidden');
-                document.getElementById('user-name').textContent = currentUser.name;
-                document.getElementById('user-email').textContent = currentUser.email;
-            } else {
-                authForms.classList.remove('hidden');
-                profileContent.classList.add('hidden');
-            }
-        }
-        
-        // Навигация по страницам
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            document.getElementById(pageId).classList.add('active');
-            
-            // Если открыта страница товаров, обновляем список
-            if (pageId === 'products') {
-                loadProducts();
-            }
-        }
+        // Показываем главную страницу при загрузке
+        window.onload = showHome;
     </script>
 </body>
 </html>
