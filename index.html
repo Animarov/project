@@ -169,7 +169,18 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
+            overflow: hidden;
+        }
+        
+        .computer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .computer-card:hover .computer-image img {
+            transform: scale(1.05);
         }
         
         .computer-details {
@@ -197,6 +208,13 @@
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
+        }
+        
+        .component-image {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
         }
         
         .buy-btn {
@@ -300,17 +318,32 @@
                     <!-- Компьютер 1 -->
                     <div class="computer-card">
                         <div class="computer-image">
-                            <i class="fas fa-computer" style="font-size: 48px;"></i>
+                            <img src="https://i.postimg.cc/R0vC16TT/IMG-20250904-235736-764.jpg&auto=format&fit=crop&w=1200&q=80" alt="Игровой компьютер">
                         </div>
                         <div class="computer-details">
                             <h3>i5-14400F + RTX 2060Super</h3>
                             <p>Игровой и мощный, а главное дешевый.</p>
                             <div class="specs">
-                                <div><span>Процессор:</span> <span>i5-14400f</span></div>
-                                <div><span>Видеокарта:</span> <span>RTX 2060Super</span></div>
-                                <div><span>SSD M2:</span> <span>512GB</span></div>
-                                <div><span>Оперативная память:</span> <span>16+16 32GB (3200)</span></div>
-                                <div><span>Блок питания:</span> <span>500W</span></div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503100.png" class="component-image" alt="Процессор"> Процессор:</span> 
+                                    <span>i5-14400f</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503462.png" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
+                                    <span>RTX 2060Super</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503046.png" class="component-image" alt="SSD"> SSD M2:</span> 
+                                    <span>512GB</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503112.png" class="component-image" alt="Память"> Оперативная память:</span> 
+                                    <span>16+16 32GB (3200)</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503088.png" class="component-image" alt="Блок питания"> Блок питания:</span> 
+                                    <span>500W</span>
+                                </div>
                             </div>
                             <button class="buy-btn">Купить</button>
                         </div>
@@ -319,17 +352,32 @@
                     <!-- Компьютер 2 -->
                     <div class="computer-card">
                         <div class="computer-image">
-                            <i class="fas fa-computer" style="font-size: 48px;"></i>
+                            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Мощный игровой компьютер">
                         </div>
                         <div class="computer-details">
                             <h3>i5-14400F + RTX 3070</h3>
                             <p>Мощная игровая система для требовательных игр.</p>
                             <div class="specs">
-                                <div><span>Процессор:</span> <span>i5-14400f</span></div>
-                                <div><span>Видеокарта:</span> <span>RTX 3070</span></div>
-                                <div><span>SSD M2:</span> <span>1000GB</span></div>
-                                <div><span>Оперативная память:</span> <span>16+16=32GB (3200)</span></div>
-                                <div><span>Блок питания:</span> <span>750W</span></div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503100.png" class="component-image" alt="Процессор"> Процессор:</span> 
+                                    <span>i5-14400f</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503462.png" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
+                                    <span>RTX 3070</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503046.png" class="component-image" alt="SSD"> SSD M2:</span> 
+                                    <span>1000GB</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503112.png" class="component-image" alt="Память"> Оперативная память:</span> 
+                                    <span>16+16=32GB (3200)</span>
+                                </div>
+                                <div>
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503088.png" class="component-image" alt="Блок питания"> Блок питания:</span> 
+                                    <span>750W</span>
+                                </div>
                             </div>
                             <button class="buy-btn">Купить</button>
                         </div>
@@ -367,4 +415,4 @@
         window.onload = showHome;
     </script>
 </body>
-</html>
+    </html>
