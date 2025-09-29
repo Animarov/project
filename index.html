@@ -17,6 +17,7 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -96,6 +97,20 @@
             text-align: center;
         }
         
+        /* Анимации переходов */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         /* Стили для меню */
         header {
             background: linear-gradient(135deg, #2c3e50, #1a2530);
@@ -172,7 +187,6 @@
         
         /* Стили для каталога */
         .catalog {
-            display: none;
             padding: 40px 0;
         }
         
@@ -216,6 +230,23 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .catalog-option:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .catalog-option:hover:before {
+            left: 100%;
         }
         
         .catalog-option:hover {
@@ -242,11 +273,10 @@
         }
         
         .computers {
-            display: none;
+            padding: 20px 0;
         }
         
         .development-message {
-            display: none;
             text-align: center;
             padding: 60px 20px;
             background: white;
@@ -274,17 +304,19 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
         
         .back-btn:hover {
             background: #2c3e50;
+            transform: translateX(-5px);
         }
         
         .computers-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            margin-top: 30px;
         }
         
         .computer-card {
@@ -292,11 +324,30 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        
+        .computer-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .computer-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .computer-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
         .computer-image {
@@ -307,6 +358,17 @@
             justify-content: center;
             color: white;
             overflow: hidden;
+            position: relative;
+        }
+        
+        .computer-image:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
         }
         
         .computer-image img {
@@ -345,13 +407,21 @@
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .specs div:last-child {
+            border-bottom: none;
         }
         
         .component-image {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             margin-right: 8px;
             vertical-align: middle;
+            object-fit: contain;
         }
         
         .buy-btn {
@@ -365,11 +435,29 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .buy-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .buy-btn:hover:before {
+            left: 100%;
         }
         
         .buy-btn:hover {
             background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            transform: translateY(-2px);
         }
         
         /* Стили для футера */
@@ -424,34 +512,36 @@
                     <span>TechStore</span>
                 </div>
                 <ul class="menu">
-                    <li><a href="#" onclick="showHome()">Главная</a></li>
-                    <li><a href="#" onclick="showCatalog()">Каталог</a></li>
+                    <li><a href="#" onclick="showPage('home')">Главная</a></li>
+                    <li><a href="#" onclick="showPage('catalog')">Каталог</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- Главная страница -->
-    <section id="home" class="hero">
-        <div class="container">
-            <h1>Сборка компьютеров или покупка готовых?</h1>
-            <p>Мы поможем вам, самые выгодные цены только у нас.</p>
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1>Сборка компьютеров или покупка готовых?</h1>
+                <p>Мы поможем вам, самые выгодные цены только у нас.</p>
+            </div>
         </div>
     </section>
 
     <!-- Каталог -->
-    <section id="catalog" class="catalog">
+    <section id="catalog" class="page">
         <div class="container">
             <!-- Секция покупки -->
             <div class="catalog-section">
                 <h2>Покупка</h2>
                 <div class="catalog-options">
-                    <div class="catalog-option buy-option" onclick="showComputers()">
+                    <div class="catalog-option buy-option" onclick="showPage('computers')">
                         <i class="fas fa-laptop"></i>
                         <h3>Купить компьютер</h3>
                         <p>Готовые решения для любых задач</p>
                     </div>
-                    <div class="catalog-option buy-option">
+                    <div class="catalog-option buy-option" onclick="showDevelopment('custom-build')">
                         <i class="fas fa-tools"></i>
                         <h3>Купить сборку компьютера</h3>
                         <p>Подберем комплектующие специально для вас</p>
@@ -475,86 +565,93 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Сообщение о разработке -->
-            <div id="development-message" class="development-message">
+    <!-- Сообщение о разработке -->
+    <section id="development-message" class="page">
+        <div class="container">
+            <div class="development-message">
                 <i class="fas fa-cogs"></i>
                 <h2>Раздел в разработке</h2>
                 <p>Данный раздел находится в стадии разработки. Пожалуйста, проверьте позже.</p>
-                <a href="#" class="back-btn" onclick="showCatalog()">Вернуться в каталог</a>
+                <a href="#" class="back-btn" onclick="showPage('catalog')">Вернуться в каталог</a>
             </div>
+        </div>
+    </section>
 
-            <div id="computers" class="computers">
-                <a href="#" class="back-btn" onclick="showCatalog()">← Вернуться в каталог</a>
-                <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">В данный момент доступно 2 игровых компьютера</h2>
-                
-                <div class="computers-list">
-                    <!-- Компьютер 1 -->
-                    <div class="computer-card">
-                        <div class="computer-image">
-                            <img src="https://i.ibb.co/nshj0-QwF/computer1.jpg" alt="Игровой компьютер">
-                        </div>
-                        <div class="computer-details">
-                            <h3>i5-14400F + RTX 2060Super</h3>
-                            <p>Игровой и мощный, а главное дешевый.</p>
-                            <div class="specs">
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503100.png" class="component-image" alt="Процессор"> Процессор:</span> 
-                                    <span>i5-14400f</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503462.png" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
-                                    <span>RTX 2060Super</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503046.png" class="component-image" alt="SSD"> SSD M2:</span> 
-                                    <span>512GB</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503112.png" class="component-image" alt="Память"> Оперативная память:</span> 
-                                    <span>16+16 32GB (3200)</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503088.png" class="component-image" alt="Блок питания"> Блок питания:</span> 
-                                    <span>500W</span>
-                                </div>
-                            </div>
-                            <button class="buy-btn">Купить</button>
-                        </div>
+    <!-- Компьютеры -->
+    <section id="computers" class="page">
+        <div class="container">
+            <a href="#" class="back-btn" onclick="showPage('catalog')">← Вернуться в каталог</a>
+            <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">В данный момент доступно 2 игровых компьютера</h2>
+            
+            <div class="computers-list">
+                <!-- Компьютер 1 -->
+                <div class="computer-card">
+                    <div class="computer-image">
+                        <img src="https://i.ibb.co/nshj0-QwF/computer1.jpg" alt="Игровой компьютер">
                     </div>
-                    
-                    <!-- Компьютер 2 -->
-                    <div class="computer-card">
-                        <div class="computer-image">
-                            <img src="https://i.ibb.co/QjJ1-Ns00/computer2.jpg" alt="Мощный игровой компьютер">
-                        </div>
-                        <div class="computer-details">
-                            <h3>i5-14400F + RTX 3070</h3>
-                            <p>Мощная игровая система для требовательных игр.</p>
-                            <div class="specs">
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503100.png" class="component-image" alt="Процессор"> Процессор:</span> 
-                                    <span>i5-14400f</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503462.png" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
-                                    <span>RTX 3070</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503046.png" class="component-image" alt="SSD"> SSD M2:</span> 
-                                    <span>1000GB</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503112.png" class="component-image" alt="Память"> Оперативная память:</span> 
-                                    <span>16+16=32GB (3200)</span>
-                                </div>
-                                <div>
-                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503088.png" class="component-image" alt="Блок питания"> Блок питания:</span> 
-                                    <span>750W</span>
-                                </div>
+                    <div class="computer-details">
+                        <h3>i5-14400F + RTX 2060Super</h3>
+                        <p>Игровой и мощный, а главное дешевый.</p>
+                        <div class="specs">
+                            <div>
+                                <span><img src="https://i.ibb.co/YT3r-Gysm/cpu.png" class="component-image" alt="Процессор"> Процессор:</span> 
+                                <span>i5-14400f</span>
                             </div>
-                            <button class="buy-btn">Купить</button>
+                            <div>
+                                <span><img src="https://i.ibb.co/XZDZ-P4BJ/gpu.png" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
+                                <span>RTX 2060Super</span>
+                            </div>
+                            <div>
+                                <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503046.png" class="component-image" alt="SSD"> SSD M2:</span> 
+                                <span>512GB</span>
+                            </div>
+                            <div>
+                                <span><img src="https://i.ibb.co/3VW56-vK/ram.png" class="component-image" alt="Память"> Оперативная память:</span> 
+                                <span>16+16 32GB (3200)</span>
+                            </div>
+                            <div>
+                                <span><img src="https://i.ibb.co/rfFFL-bfT/psu.png" class="component-image" alt="Блок питания"> Блок питания:</span> 
+                                <span>500W</span>
+                            </div>
                         </div>
+                        <button class="buy-btn">Купить</button>
+                    </div>
+                </div>
+                
+                <!-- Компьютер 2 -->
+                <div class="computer-card">
+                    <div class="computer-image">
+                        <img src="https://i.ibb.co/QjJ1-Ns00/computer2.jpg" alt="Мощный игровой компьютер">
+                    </div>
+                    <div class="computer-details">
+                        <h3>i5-14400F + RTX 3070</h3>
+                        <p>Мощная игровая система для требовательных игр.</p>
+                        <div class="specs">
+                            <div>
+                                <span><img src="https://i.ibb.co/YT3r-Gysm/cpu.png" class="component-image" alt="Процессор"> Процессор:</span> 
+                                <span>i5-14400f</span>
+                            </div>
+                            <div>
+                                <span><img src="https://i.ibb.co/XZDZ-P4BJ/gpu.png" class="component-image" alt="Видеокарта"> Видеокарта:</span> 
+                                <span>RTX 3070</span>
+                            </div>
+                            <div>
+                                <span><img src="https://cdn-icons-png.flaticon.com/512/3503/3503046.png" class="component-image" alt="SSD"> SSD M2:</span> 
+                                <span>1000GB</span>
+                            </div>
+                            <div>
+                                <span><img src="https://i.ibb.co/3VW56-vK/ram.png" class="component-image" alt="Память"> Оперативная память:</span> 
+                                <span>16+16=32GB (3200)</span>
+                            </div>
+                            <div>
+                                <span><img src="https://i.ibb.co/rfFFL-bfT/psu.png" class="component-image" alt="Блок питания"> Блок питания:</span> 
+                                <span>750W</span>
+                            </div>
+                        </div>
+                        <button class="buy-btn">Купить</button>
                     </div>
                 </div>
             </div>
@@ -573,58 +670,38 @@
         function startLoader() {
             const loader = document.getElementById('loader');
             
-            // Запускаем анимацию волн (они уже бесконечные в CSS)
-            
             // Скрываем загрузчик через 3 секунды
             setTimeout(() => {
                 loader.style.opacity = '0';
                 setTimeout(() => {
                     loader.style.display = 'none';
-                    showHome();
                 }, 500);
             }, 3000);
         }
         
-        // Функции для отображения нужных разделов
-        function showHome() {
-            document.getElementById('home').style.display = 'block';
-            document.getElementById('catalog').style.display = 'none';
-        }
-        
-        function showCatalog() {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('catalog').style.display = 'block';
-            document.getElementById('computers').style.display = 'none';
-            document.getElementById('development-message').style.display = 'none';
+        // Функция для показа страницы с анимацией
+        function showPage(pageId) {
+            // Получаем все страницы
+            const pages = document.querySelectorAll('.page');
             
-            // Показываем опции каталога
-            document.querySelectorAll('.catalog-options').forEach(el => {
-                el.style.display = 'grid';
+            // Скрываем все страницы
+            pages.forEach(page => {
+                page.classList.remove('active');
             });
-        }
-        
-        function showComputers() {
-            document.getElementById('computers').style.display = 'block';
-            document.getElementById('development-message').style.display = 'none';
             
-            // Скрываем опции каталога
-            document.querySelectorAll('.catalog-options').forEach(el => {
-                el.style.display = 'none';
-            });
+            // Показываем выбранную страницу
+            setTimeout(() => {
+                document.getElementById(pageId).classList.add('active');
+            }, 50);
         }
         
+        // Функция для показа сообщения о разработке
         function showDevelopment(section) {
-            document.getElementById('development-message').style.display = 'block';
-            document.getElementById('computers').style.display = 'none';
-            
-            // Скрываем опции каталога
-            document.querySelectorAll('.catalog-options').forEach(el => {
-                el.style.display = 'none';
-            });
+            showPage('development-message');
         }
         
         // Запускаем анимацию загрузки при загрузке страницы
         window.onload = startLoader;
     </script>
 </body>
-</html>
+                                    </html>
