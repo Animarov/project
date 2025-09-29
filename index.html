@@ -58,9 +58,10 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 0%;
             background: linear-gradient(to top, #4ca1af, #2c3e50);
             border-radius: 50%;
+            animation: fillWater 3s ease-in-out forwards;
         }
         
         .water:before, .water:after {
@@ -79,6 +80,15 @@
             border-radius: 40%;
             background: rgba(255, 255, 255, 0.1);
             animation: wave 7s linear infinite;
+        }
+        
+        @keyframes fillWater {
+            0% {
+                height: 0%;
+            }
+            100% {
+                height: 100%;
+            }
         }
         
         @keyframes wave {
@@ -520,7 +530,7 @@
     </header>
 
     <!-- Главная страница -->
-    <section id="home" class="page active">
+    <section id="home" class="page">
         <div class="hero">
             <div class="container">
                 <h1>Сборка компьютеров или покупка готовых?</h1>
@@ -675,6 +685,8 @@
                 loader.style.opacity = '0';
                 setTimeout(() => {
                     loader.style.display = 'none';
+                    // Показываем главную страницу после загрузки
+                    document.getElementById('home').classList.add('active');
                 }, 500);
             }, 3000);
         }
@@ -704,4 +716,4 @@
         window.onload = startLoader;
     </script>
 </body>
-                                    </html>
+</html>
