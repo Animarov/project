@@ -25,6 +25,78 @@
             padding: 0 20px;
         }
         
+        /* Стили для анимации загрузки */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loader-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.1),
+                        inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .water {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to top, #4ca1af, #2c3e50);
+            transition: height 2s ease-in-out;
+            border-radius: 50%;
+        }
+        
+        .water:before, .water:after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -150%;
+            left: -50%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 45%;
+            animation: wave 5s linear infinite;
+        }
+        
+        .water:after {
+            border-radius: 40%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: wave 7s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .loader-text {
+            color: white;
+            font-size: 24px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
         /* Стили для меню */
         header {
             background: linear-gradient(135deg, #2c3e50, #1a2530);
@@ -336,6 +408,14 @@
     </style>
 </head>
 <body>
+    <!-- Анимация загрузки -->
+    <div id="loader">
+        <div class="loader-circle">
+            <div class="water"></div>
+        </div>
+        <div class="loader-text">Загрузка...</div>
+    </div>
+
     <!-- Шапка с меню -->
     <header>
         <div class="container">
@@ -413,7 +493,7 @@
                     <!-- Компьютер 1 -->
                     <div class="computer-card">
                         <div class="computer-image">
-                            <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Игровой компьютер">
+                            <img src="https://i.ibb.co/nshj0-QwF/computer1.jpg" alt="Игровой компьютер">
                         </div>
                         <div class="computer-details">
                             <h3>i5-14400F + RTX 2060Super</h3>
@@ -447,7 +527,7 @@
                     <!-- Компьютер 2 -->
                     <div class="computer-card">
                         <div class="computer-image">
-                            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Мощный игровой компьютер">
+                            <img src="https://i.ibb.co/QjJ1-Ns00/computer2.jpg" alt="Мощный игровой компьютер">
                         </div>
                         <div class="computer-details">
                             <h3>i5-14400F + RTX 3070</h3>
@@ -490,6 +570,26 @@
     </footer>
 
     <script>
+        // Функция для анимации загрузки
+        function startLoader() {
+            const loader = document.getElementById('loader');
+            const water = document.querySelector('.water');
+            
+            // Запускаем анимацию наполнения
+            setTimeout(() => {
+                water.style.height = '100%';
+            }, 100);
+            
+            // Скрываем загрузчик через 3 секунды
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    showHome();
+                }, 500);
+            }, 3000);
+        }
+        
         // Функции для отображения нужных разделов
         function showHome() {
             document.getElementById('home').style.display = 'block';
@@ -528,8 +628,8 @@
             });
         }
         
-        // Показываем главную страницу при загрузке
-        window.onload = showHome;
+        // Запускаем анимацию загрузки при загрузке страницы
+        window.onload = startLoader;
     </script>
 </body>
-</html>
+    </html>
