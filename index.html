@@ -57,9 +57,8 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 0%;
+            height: 100%;
             background: linear-gradient(to top, #4ca1af, #2c3e50);
-            transition: height 2s ease-in-out;
             border-radius: 50%;
         }
         
@@ -573,12 +572,8 @@
         // Функция для анимации загрузки
         function startLoader() {
             const loader = document.getElementById('loader');
-            const water = document.querySelector('.water');
             
-            // Запускаем анимацию наполнения
-            setTimeout(() => {
-                water.style.height = '100%';
-            }, 100);
+            // Запускаем анимацию волн (они уже бесконечные в CSS)
             
             // Скрываем загрузчик через 3 секунды
             setTimeout(() => {
@@ -632,4 +627,4 @@
         window.onload = startLoader;
     </script>
 </body>
-    </html>
+</html>
